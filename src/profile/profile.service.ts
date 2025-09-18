@@ -1,26 +1,47 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Profile } from './entities/profile.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProfileService {
-  create(createProfileDto: CreateProfileDto) {
-    return 'This action adds a new profile';
+  constructor(
+    @InjectRepository(Profile) private profileRepository: Repository<Profile>,
+  ) {}
+
+  async create(createProfileDto: CreateProfileDto) {
+    const profile = this.profileRepository.create(createProfileDto);
+    return await this.profileRepository.save(profile);
   }
 
-  findAll() {
-    return `This action returns all profile`;
+  async findAll() {
+    return await this.profileRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} profile`;
+  async findOne(id: number) {
+    const profile = await this.profileRepository.findOne({ where: { id } });
+    if (!profile) {
+      return { found: false, message: 'Profile not found' };
+    }
+    return profile;
+  }
+  async update(id: number, updateProfileDto: UpdateProfileDto) {
+    const profile = await this.profileRepository.findOne({ where: { id } });
+    if (!profile) {
+      return { updated: false, message: 'Profile not found' };
+    }
+    await this.profileRepository.update(id, updateProfileDto);
+    return this.profileRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateProfileDto: UpdateProfileDto) {
-    return `This action updates a #${id} profile`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} profile`;
+  async remove(id: number) {
+    const profile = await this.profileRepository.findOne({ where: { id } });
+    if (!profile) {
+      return { deleted: false, message: 'Profile not found' };
+    }
+    await this.profileRepository.delete(id);
+    return { deleted: true, message: 'Profile deleted successfully' };
   }
 }

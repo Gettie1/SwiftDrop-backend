@@ -19,14 +19,16 @@ export enum Role {
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+  @Column({ unique: true })
   username: string;
   @Column()
   password: string;
-  @Column()
+  @Column({ unique: true })
   email: string;
   @Column({ type: 'enum', enum: Role, default: Role.CUSTOMER })
   role: Role;
+  @Column({ nullable: true })
+  hashedRefreshToken?: string;
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
   @Column({
@@ -35,7 +37,10 @@ export class User {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
-  @OneToOne(() => Profile, (profile) => profile.user)
+  @OneToOne(() => Profile, (profile) => profile.user, {
+    cascade: true,
+    eager: true,
+  })
   @JoinColumn({ name: 'profileId' })
   profile: Profile;
   @Column({ nullable: true })

@@ -1,0 +1,70 @@
+@url = http://localhost:4001
+
+### Create User
+POST {{url}}/users
+Content-Type: application/json
+
+{
+  "username": "june",
+  "password": "securepassword",
+  "email": "june@example.com",
+  "role": "customer"
+}
+
+### Get All Users
+GET {{url}}/users
+### Get User by ID
+GET {{url}}/users/1
+### Update User
+PATCH {{url}}/users/3
+Content-Type: application/json
+
+{
+  "email": "june.doe@example.com"
+}
+### Delete User
+DELETE {{url}}/users/3
+
+### Create Profile
+POST {{url}}/profile
+Content-Type: application/json
+
+{
+  "firstName": "June",
+  "lastName": "Doe",
+  "address": "123 Main St",
+  "phoneNumber": "555-1234",
+    "userId": 2
+}
+
+### Get All Profiles
+GET {{url}}/profile
+
+### Get Profile by ID
+GET {{url}}/profile/2
+
+### Update Profile
+PATCH {{url}}/profile/1
+Content-Type: application/json
+
+{
+  "address": "456 Elm St",
+  "phoneNumber": "555-5678"
+}
+
+### Delete Profile
+DELETE {{url}}/profile/3
+
+### Create Parcel
+POST {{url}}/parcel
+Content-Type: application/json
+
+{
+  "description": "Electronics",
+  "weight": 5,
+  "status": "pending",
+  "pickupAddress": "123 Main St",
+  "destinationAddress": "456 Elm St",
+  "senderId": 1,
+  "courierId": 2
+}
