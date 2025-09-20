@@ -11,15 +11,26 @@ export class ParcelService {
     @InjectRepository(Parcel) private parcelRepository: Repository<Parcel>,
   ) {}
   async create(createParcelDto: CreateParcelDto) {
-    const parcelData = {
+    const parcel = this.parcelRepository.create({
       ...createParcelDto,
       weight:
         typeof createParcelDto.weight === 'string'
           ? Number(createParcelDto.weight)
           : createParcelDto.weight,
-    };
-    const parcel = this.parcelRepository.create(parcelData);
-    return await this.parcelRepository.save(parcel);
+      recipientId:
+        createParcelDto.recipientId !== undefined
+          ? String(createParcelDto.recipientId)
+          : undefined,
+      senderId:
+        typeof createParcelDto.senderId === 'string'
+          ? String(createParcelDto.senderId)
+          : createParcelDto.senderId,
+      courierId:
+        createParcelDto.courierId !== undefined
+          ? String(createParcelDto.courierId)
+          : undefined,
+    } as Partial<Parcel>);
+    return this.parcelRepository.save(parcel);
   }
 
   async findAll() {
@@ -44,6 +55,18 @@ export class ParcelService {
         typeof updateParcelDto.weight === 'string'
           ? Number(updateParcelDto.weight)
           : updateParcelDto.weight,
+      recipientId:
+        updateParcelDto.recipientId !== undefined
+          ? Number(updateParcelDto.recipientId)
+          : undefined,
+      senderId:
+        updateParcelDto.senderId !== undefined
+          ? Number(updateParcelDto.senderId)
+          : undefined,
+      courierId:
+        updateParcelDto.courierId !== undefined
+          ? Number(updateParcelDto.courierId)
+          : undefined,
     };
     await this.parcelRepository.update(id, updateData);
     return await this.parcelRepository.findOneBy({ id });
@@ -51,6 +74,6 @@ export class ParcelService {
 
   async remove(id: number) {
     await this.parcelRepository.delete(id);
-    return { deleted: true };
+    return { deleted: true, message: 'Parcel deleted successfully' };
   }
 }

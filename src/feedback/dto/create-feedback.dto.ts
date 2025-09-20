@@ -2,13 +2,13 @@ import { IsString } from 'class-validator';
 
 export class CreateFeedbackDto {
   @IsString()
-  parcelId: string;
+  parcelId: number;
   @IsString()
-  senderId: string;
+  senderId: number;
   @IsString()
-  courierId: string;
+  courierId: number;
   @IsString()
-  rating: string;
+  rating: number;
   @IsString()
   comment: string;
 }

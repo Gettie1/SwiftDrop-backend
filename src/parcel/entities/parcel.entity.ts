@@ -28,7 +28,7 @@ export class Parcel {
   @JoinColumn({ name: 'senderId' })
   sender: User;
   @Column()
-  senderId: string;
+  senderId: number;
   @ManyToOne(() => User, (user) => user.deliveries, { nullable: true })
   @JoinColumn({ name: 'courierId' })
   courier: User;

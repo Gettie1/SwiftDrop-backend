@@ -4,7 +4,7 @@ export class CreateParcelDto {
   @IsString()
   description: string;
   @IsString()
-  weight: string;
+  weight: number;
   @IsString()
   pickupAddress: string;
   @IsString()
@@ -12,7 +12,9 @@ export class CreateParcelDto {
   @IsString()
   status: string;
   @IsString()
-  senderId: string;
+  senderId: number;
   @IsString()
-  courierId?: string;
+  courierId?: number;
+  @IsString()
+  recipientId?: number;
 }

@@ -60,11 +60,28 @@ POST {{url}}/parcel
 Content-Type: application/json
 
 {
-  "description": "Electronics",
+  "description": "Certificate",
   "weight": 5,
   "status": "pending",
   "pickupAddress": "123 Main St",
   "destinationAddress": "456 Elm St",
   "senderId": 1,
-  "courierId": 2
+  "courierId": 2,
+  "recipientId": 3
 }
+
+### Get All Parcels
+GET {{url}}/parcel
+### Get Parcel by ID
+GET {{url}}/parcel/4
+### Update Parcel
+PATCH {{url}}/parcel/4
+Content-Type: application/json
+
+{
+  "status": "shipped"
+}
+
+### Delete Parcel
+DELETE {{url}}/parcel/5
+
