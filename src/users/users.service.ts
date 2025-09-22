@@ -9,11 +9,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import * as Bcrypt from 'bcrypt';
+import { Mailer } from 'src/mails/mailHelper';
+import { MailService } from 'src/mails/mails.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private readonly mailService: MailService,
   ) {}
 
   private async hashData(data: string): Promise<string> {
@@ -48,6 +51,11 @@ export class UsersService {
       role: createUserDto.role ? createUserDto.role : undefined,
     });
     const savedUser = await this.userRepository.save(user);
+    const mailer = Mailer(this.mailService);
+    await mailer.welcomeMail({
+      email: savedUser.email,
+      name: savedUser.username,
+    });
     return this.excludePassword(savedUser);
   }
 

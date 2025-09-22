@@ -5,10 +5,10 @@ POST {{url}}/users
 Content-Type: application/json
 
 {
-  "username": "june",
-  "password": "securepassword",
-  "email": "june@example.com",
-  "role": "customer"
+  "username": "gett",
+  "password": "gett3648",
+  "email": "gett3648@gmail.com",
+  "role": "admin"
 }
 
 ### Get All Users
@@ -23,7 +23,7 @@ Content-Type: application/json
   "email": "june.doe@example.com"
 }
 ### Delete User
-DELETE {{url}}/users/3
+DELETE {{url}}/users/6
 
 ### Create Profile
 POST {{url}}/profile

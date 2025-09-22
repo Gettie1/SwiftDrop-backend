@@ -4,11 +4,13 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Profile } from './entities/profile.entity';
 import { Repository } from 'typeorm';
+// import { MailService } from 'src/mails/mails.service';
 
 @Injectable()
 export class ProfileService {
   constructor(
     @InjectRepository(Profile) private profileRepository: Repository<Profile>,
+    // private readonly mailService: MailService,
   ) {}
 
   async create(createProfileDto: CreateProfileDto) {
