@@ -92,6 +92,11 @@ export class UsersService {
     return this.excludePassword(updatedUser);
   }
 
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    return user || null;
+  }
+
   async remove(id: number): Promise<string> {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {

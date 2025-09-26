@@ -23,7 +23,7 @@ Content-Type: application/json
   "email": "june.doe@example.com"
 }
 ### Delete User
-DELETE {{url}}/users/6
+DELETE {{url}}/users/7
 
 ### Create Profile
 POST {{url}}/profile

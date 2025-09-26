@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ParcelModule } from './parcel/parcel.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { LoggerMiddleware } from './logger.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { LoggerMiddleware } from './logger.middleware';
     ProfileModule,
     DatabaseModule,
     FeedbackModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
