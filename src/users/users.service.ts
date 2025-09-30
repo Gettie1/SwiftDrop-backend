@@ -32,14 +32,30 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<Partial<User>> {
     // ✅ Check if email already exists
     const existingUser = await this.userRepository.findOne({
-      where: { email: createUserDto.email },
+      where: { email: createUserDto.email, username: createUserDto.username },
       select: ['id'],
     });
 
     if (existingUser) {
-      throw new BadRequestException(
-        `User with email ${createUserDto.email} already exists`,
-      );
+      const emailExists = await this.userRepository.findOne({
+        where: { email: createUserDto.email },
+        select: ['id'],
+      });
+      if (emailExists) {
+        throw new BadRequestException(
+          `User with email ${createUserDto.email} already exists`,
+        );
+      }
+
+      const usernameExists = await this.userRepository.findOne({
+        where: { username: createUserDto.username },
+        select: ['id'],
+      });
+      if (usernameExists) {
+        throw new BadRequestException(
+          `User with username ${createUserDto.username} already exists`,
+        );
+      }
     }
 
     // ✅ Hash password before saving

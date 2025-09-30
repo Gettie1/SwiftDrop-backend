@@ -7,6 +7,10 @@ import { ParcelModule } from './parcel/parcel.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { LoggerMiddleware } from './logger.middleware';
 import { AuthModule } from './auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/entities/user.entity';
+import { AtGuard } from './auth/guards/at.guard';
+import { RolesGuard } from './auth/guards/roles.guard';
 
 @Module({
   imports: [
@@ -14,6 +18,7 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
       envFilePath: '.env',
     }),
+    TypeOrmModule.forFeature([User]),
     UsersModule,
     ParcelModule,
     ProfileModule,
@@ -22,7 +27,10 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    { provide: 'APP_GUARD', useClass: AtGuard },
+    { provide: 'APP_GUARD', useClass: RolesGuard },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

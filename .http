@@ -1,5 +1,17 @@
 @url = http://localhost:4001
 
+@access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4IiwiZW1haWwiOiJnZXR0MzY0OEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg5NjMzNDQsImV4cCI6MTc1OTA0OTc0NH0.QKvuw0y7_NHAA-Esx6WwTAHE9XQdrRrpue-IJXFNSuE
+@refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4IiwiZW1haWwiOiJnZXR0MzY0OEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg5NjMzNDQsImV4cCI6MTc1OTU2ODE0NH0.GMlfxYXBL40NOTVe40n55QlseGNFvPeB29ihspW_AHY
+
+### sigin
+POST {{url}}/auth/signin
+Content-Type: application/json
+
+{
+  "email": "gett3648@gmail.com",
+  "password": "gett3648"
+}
+
 ### Create User
 POST {{url}}/users
 Content-Type: application/json
@@ -7,17 +19,20 @@ Content-Type: application/json
 {
   "username": "gett",
   "password": "gett3648",
-  "email": "gett3648@gmail.com",
+  "email": "3648@gmail.com",
   "role": "admin"
 }
 
 ### Get All Users
 GET {{url}}/users
+Authorization: Bearer {{access_token}}
 ### Get User by ID
 GET {{url}}/users/1
+Authorization: Bearer {{access_token}}
 ### Update User
 PATCH {{url}}/users/3
 Content-Type: application/json
+Authorization: Bearer {{access_token}}
 
 {
   "email": "june.doe@example.com"

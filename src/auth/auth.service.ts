@@ -23,7 +23,7 @@ export class AuthService {
         {
           secret: this.configService.get<string>('JWT_ACCESS_TOKEN_SECRET'),
           expiresIn: this.configService.get<string>(
-            'JWT_ACCESS_TOKEN_EXPIRATION_TIME',
+            'JWT_ACCESS_TOKEN_EXPIRE_IN',
           ),
         },
       ),
@@ -36,7 +36,7 @@ export class AuthService {
         {
           secret: this.configService.get<string>('JWT_REFRESH_TOKEN_SECRET'),
           expiresIn: this.configService.get<string>(
-            'JWT_REFRESH_TOKEN_EXPIRATION_TIME',
+            'JWT_REFRESH_TOKEN_EXPIRE_IN',
           ),
         },
       ),
@@ -73,6 +73,12 @@ export class AuthService {
     );
     await this.saveRefreshToken(user.id, refresh_token);
     return {
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        username: user.username,
+      },
       access_token,
       refresh_token,
     };
