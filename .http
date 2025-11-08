@@ -1,7 +1,7 @@
 @url = http://localhost:4001
 
-@access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4IiwiZW1haWwiOiJnZXR0MzY0OEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg5NjMzNDQsImV4cCI6MTc1OTA0OTc0NH0.QKvuw0y7_NHAA-Esx6WwTAHE9XQdrRrpue-IJXFNSuE
-@refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4IiwiZW1haWwiOiJnZXR0MzY0OEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTg5NjMzNDQsImV4cCI6MTc1OTU2ODE0NH0.GMlfxYXBL40NOTVe40n55QlseGNFvPeB29ihspW_AHY
+@access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4IiwiZW1haWwiOiJnZXR0MzY0OEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjI2MjMyNzgsImV4cCI6MTc2MjcwOTY3OH0.u3jrqPd-tXg-4_caF3xWW3aJtDfjKZp97IUWLJHSCsQ
+@refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4IiwiZW1haWwiOiJnZXR0MzY0OEBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjI2MjMyNzgsImV4cCI6MTc2MzIyODA3OH0.GURimOLUVNKA4e3Q5-zvm8RIH8O7xS8zEQsiNwebkoA
 
 ### sigin
 POST {{url}}/auth/signin
@@ -79,7 +79,6 @@ Content-Type: application/json
   "weight": 5,
   "status": "pending",
   "pickupAddress": "123 Main St",
-  "destinationAddress": "456 Elm St",
   "senderId": 1,
   "courierId": 2,
   "recipientId": 3
@@ -87,6 +86,7 @@ Content-Type: application/json
 
 ### Get All Parcels
 GET {{url}}/parcel
+Authorization: Bearer {{access_token}}
 ### Get Parcel by ID
 GET {{url}}/parcel/4
 ### Update Parcel

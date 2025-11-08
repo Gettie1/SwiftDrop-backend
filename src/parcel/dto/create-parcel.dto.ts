@@ -8,8 +8,6 @@ export class CreateParcelDto {
   @IsString()
   pickupAddress: string;
   @IsString()
-  destinationAddress: string;
-  @IsString()
   status: string;
   @IsString()
   senderId: number;

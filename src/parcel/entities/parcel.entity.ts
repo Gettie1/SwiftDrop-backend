@@ -11,7 +11,7 @@ export class Parcel {
   @Column()
   weight: number;
   @Column()
-  destinationAddress: string;
+  pickupAddress: string;
   @Column()
   recipientId?: number;
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
